@@ -733,6 +733,35 @@ function obj.getpixel(x,y,type)end
 function obj.getpixel(x,y)end
 
 
+---画像データの要素を設定する
+---引数に渡すデータの種類は`obj.pixeloption`で設定したものになる
+---@see obj.pixeloption
+---@param x integer # ピクセルの座標(X)
+---@param y integer # ピクセルの座標(Y)
+---@param col integer
+---@param alpha number
+function obj.putpixel(x,y,col,alpha)end
+
+---画像データの要素を設定する
+---引数に渡すデータの種類は`obj.pixeloption`で設定したものになる
+---@see obj.pixeloption
+---@param x integer # ピクセルの座標(X)
+---@param y integer # ピクセルの座標(Y)
+---@param e1 integer
+---@param e2 integer
+---@param e3 integer
+---@param a integer
+function obj.putpixel(x,y,e1,e2,e3,a)end
+
+
+---ピクセル情報をコピーする
+---@param dst_x integer コピー先の座標(X)
+---@param dst_y integer コピー先の座標(Y)
+---@param src_x integer コピー元の座標(X)
+---@param src_y integer コピー元の座標(Y)
+function obj.copypixel(dst_x,dst_y,src_x,src_y)end
+
+
 ---`obj.getpixel`,`obj.putpixel`で受け渡すピクセル情報の種類を設定する
 ---@param name "type"
 ---@param value "col"|"rgb"|"yc"
@@ -741,6 +770,16 @@ function obj.pixeloption(name,value)end
 ---ピクセル情報の読み出し元を設定する
 ---@param name "get"
 ---@param value "object"|"framebuffer"|"obj"|"frm"
+function obj.pixeloption(name,value)end
+
+---ピクセル情報の書き込み先を設定する
+---@param name "put"
+---@param value "object"|"framebuffer"|"obj"|"frm"
+function obj.pixeloption(name,value)end
+
+---書き込むときの合成モードを指定する
+---@param name "blend"
+---@param value blend_mode
 function obj.pixeloption(name,value)end
 
 

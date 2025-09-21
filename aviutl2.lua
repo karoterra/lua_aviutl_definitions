@@ -603,12 +603,14 @@ function obj.getoption(name)end
 ---|'"rx"' # 回転(X軸)
 ---|'"ry"' # 回転(Y軸)
 ---|'"rz"' # 回転(Z軸)
+---|'"cx"' # 基準中心座標(X)
+---|'"cy"' # 基準中心座標(Y)
+---|'"cz"' # 基準中心座標(Z)
 ---|'"zoom"'   # 拡大率(等倍は*100*)
 ---|'"alpha"'  # 不透明度
 ---|'"aspect"' # 縦横比
 ---|'"time"'   # オブジェクト基準の時間
 ---|'"scenechange"' # シーンチェンジの進行度 (`[0,1]`)
----|string # "layer{番号}.{種類}
 
 ---標準/拡張描画等の設定を取得する
 ---time = obj.time
@@ -631,6 +633,30 @@ function obj.getvalue(target,time)end
 ---@param time number # 基準時間
 ---@param section integer # 基準区間
 ---@return number
+---@nodiscard
+function obj.getvalue(target,time,section)end
+
+---指定したレイヤーにあるオブジェクトの設定を取得する
+---time = obj.time
+---section = 0
+---@param target string # "layer{番号}.{種類}"
+---@return number|nil # 指定したレイヤーにオブジェクトが無い場合はnil
+---@nodiscard
+function obj.getvalue(target)end
+
+---指定したレイヤーにあるオブジェクトの設定を取得する
+---section = 0
+---@param target string # "layer{番号}.{種類}"
+---@param time number # 基準時間
+---@return number|nil # 指定したレイヤーにオブジェクトが無い場合はnil
+---@nodiscard
+function obj.getvalue(target,time)end
+
+---指定したレイヤーにあるオブジェクトの設定を取得する
+---@param target string # "layer{番号}.{種類}"
+---@param time number # 基準時間
+---@param section integer # 基準区間
+---@return number|nil # 指定したレイヤーにオブジェクトが無い場合はnil
 ---@nodiscard
 function obj.getvalue(target,time,section)end
 

@@ -279,7 +279,7 @@ function obj.drawpoly(vertex)end
 
 ---複数分のobj.drawpoly()の引数をテーブルで指定することが出来ます。
 ---obj.drawpoly()を複数回呼び出すより描画が速くなります。
----テーブルの形式は下記が対応しています。
+---テーブルの形式は下記が対応しています。 ※異なる形式を混在させる事はできません
 ---
 ---- `{x0,y0,z0,x1,y1,z1,x2,y2,z2,x3,y3,z3,u0,v0,u1,v1,u2,v2,u3,v3}`
 ---- `{x0,y0,z0,x1,y1,z1,x2,y2,z2,x3,y3,z3,u0,v0,u1,v1,u2,v2,u3,v3,vx0,vy0,vz0,vx1,vy1,vz1,vx2,vy2,vz2,vx3,vy3,vz3}`
@@ -287,10 +287,27 @@ function obj.drawpoly(vertex)end
 ---- `{x0,y0,z0,x1,y1,z1,x2,y2,z2,x3,y3,z3,r0,g0,b0,a0,r1,g1,b1,a1,r2,g2,b2,a2,r3,g3,b3,a3,vx0,vy0,vz0,vx1,vy1,vz1,vx2,vy2,vz2,vx3,vy3,vz3}`
 ---
 ---※ `vx,vy,vz` は法線ベクトル
----※ `r,g,b,a` は描画色(0.0～1.0の乗算済みα) ※オブジェクトの画像は利用されません
+---※ `r,g,b,a` は描画色(0.0～1.0の乗算済みα) ※色の指定時はオブジェクトの画像は利用されません
 ---@param vertex number[][]
 ---@param alpha number # 不透明度
 function obj.drawpoly(vertex, alpha)end
+
+---頂点リストのテーブルを指定して四角形、三角形を描画することが出来ます。
+---テーブルの形式は下記が対応しています。※異なる形式を混在させる事はできません
+---
+---- `{x,y,z,u,v}`              : 頂点座標 + テクスチャ座標
+---- `{x,y,z,u,v,vx,vy,vz}`     : 頂点座標 + テクスチャ座標 + 法線ベクトル
+---- `{x,y,z,r,g,b,a}`          : 頂点座標 + 頂点の色
+---- `{x,y,z,r,g,b,a,vx,vy,vz}` : 頂点座標 + 頂点の色 + 法線ベクトル
+---
+---※テーブルは面の頂点数で割り切れる数になります  
+---※u,vはオブジェクトの正規化座標(0.0～1.0)  
+---※vx,vy,vzは法線ベクトル  
+---※r,g,b,aは描画色(0.0～1.0の乗算済みα) ※色の指定時はオブジェクトの画像は利用されません  
+---@param vertex number[][]
+---@param vertex_num 4|3 # 面の頂点数( 4<デフォルト>=四角形 / 3=三角形 )
+---@param alpha number # 不透明度
+function obj.drawpoly(vertex, vertex_num, alpha)end
 
 
 ---@alias load_option
@@ -954,6 +971,17 @@ function obj.getinfo(name)end
 ---@nodiscard
 function obj.getinfo(name)end
 
+---アプリ起動からの経過時間(秒)を取得する
+---@param name "clock"
+---@return number
+---@nodiscard
+function obj.getinfo(name)end
+
+---スクリプト実行開始からの経過時間(ミリ秒)を取得する
+---@param name "script_time"
+---@return number
+---@nodiscard
+function obj.getinfo(name)end
 
 ---連続した4点`p0,p1,p2,p3`から時間`t`に応じた`p1,p2`間の座標を返す
 ---@param t number

@@ -826,6 +826,58 @@ function obj.pixeloption(name,value)end
 function obj.pixeloption(name,value)end
 
 
+---@alias buffer_pixeldata_name
+---|'"object"' # オブジェクト
+---|'"tempbuffer"' # 仮想バッファ
+---|'"framebuffer"' # フレームバッファ
+---|buffer_cache_name # キャッシュバッファ
+
+---画像バッファからRGBA(32bit)形式でデータを読み出します。
+---
+---この関数はDLLを利用して画像処理をする為のものです。  
+---※VRAMからデータを取得するので処理は速くないです。
+---@param target buffer_pixeldata_name # 読み込む画像バッファ
+---@return lightuserdata # 画像データのポインタ (フォーマットはRGBA32bit)
+---@return integer # 画像の幅
+---@return integer # 画像の高さ
+---@nodiscard
+function obj.getpixeldata(target)end
+
+---画像バッファからRGBA(32bit)形式でデータを読み出します。
+---
+---この関数はDLLを利用して画像処理をする為のものです。  
+---※VRAMからデータを取得するので処理は速くないです。
+---@param target buffer_pixeldata_name # 読み込む画像バッファ
+---@param format "rgba"|"bgra" # 画像データのフォーマット (`"rgba"` = RGBA32bit / `"bgra"` = BGRA32bit)
+---@return lightuserdata # 画像データのポインタ
+---@return integer # 画像の幅
+---@return integer # 画像の高さ
+---@nodiscard
+function obj.getpixeldata(target,format)end
+
+
+---RGBA(32bit)形式のデータを画像バッファへ書き込みます。
+---
+---この関数はDLLを利用して画像処理をする為のものです。  
+---※VRAMへデータを書き込むので処理は速くないです。
+---@param target buffer_pixeldata_name # 書き込む画像バッファ
+---@param data lightuserdata # 画像データのポインタ (フォーマットはRGBA32bit)
+---@param w integer # 画像の幅
+---@param h integer # 画像の高さ
+function obj.putpixeldata(target,data,w,h)end
+
+---RGBA(32bit)形式のデータを画像バッファへ書き込みます。
+---
+---この関数はDLLを利用して画像処理をする為のものです。  
+---※VRAMへデータを書き込むので処理は速くないです。
+---@param target buffer_pixeldata_name # 書き込む画像バッファ
+---@param data lightuserdata # 画像データのポインタ
+---@param w integer # 画像の幅
+---@param h integer # 画像の高さ
+---@param format "rgba"|"bgra" # 画像データのフォーマット (`"rgba"` = RGBA32bit / `"bgra"` = BGRA32bit)
+function obj.putpixeldata(target,data,w,h,format)end
+
+
 ---@alias buffer_shader_name
 ---|'"object"'
 ---|'"tempbuffer"'
@@ -1007,6 +1059,13 @@ function obj.getinfo(name)end
 ---@param name "script_time"
 ---@return number
 ---@nodiscard
+function obj.getinfo(name)end
+
+---バージョン情報を取得
+---
+---例： AviUtl ExEdit2 version 2.0 beta13 → 2001300
+---@param name "version"
+---@return integer
 function obj.getinfo(name)end
 
 ---連続した4点`p0,p1,p2,p3`から時間`t`に応じた`p1,p2`間の座標を返す

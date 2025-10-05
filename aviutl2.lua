@@ -110,6 +110,7 @@ local camera_param={}
 ---@field layer integer # オブジェクトのあるレイヤー番号
 ---@field index integer # 個別オブジェクトの番号 (0-indexed)
 ---@field num integer   # 個別オブジェクトの個数
+---@field id integer    # オブジェクトのID
 ---@field track0 number # 1番目のトラックバーの値
 ---@field track1 number # 2番目のトラックバーの値
 ---@field track2 number # 3番目のトラックバーの値

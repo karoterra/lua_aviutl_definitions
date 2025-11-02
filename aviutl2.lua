@@ -684,10 +684,21 @@ function obj.getvalue(target,time,section)end
 function obj.setanchor(name,num,...)end
 
 
+---@alias getaudio_types
+---|'"pcm"'         # PCMサンプリングデータ(16bitモノラルのスケール基準)
+---|'"spectrum"'    # 周波数毎の音量データ
+---|'"fourier"'     # 音声を離散フーリエ変換したデータ(sizeの指定は不要)
+---|'"pcm.l"'       # PCMサンプリングデータ(左チャンネル)
+---|'"pcm.r"'       # PCMサンプリングデータ(右チャンネル)
+---|'"spectrum.l"'  # 周波数毎の音量データ(左チャンネル)
+---|'"spectrum.r"'  # 周波数毎の音量データ(右チャンネル)
+---|'"fourier.l"'   # 音声を離散フーリエ変換したデータ(左チャンネル)
+---|'"fourier.r"'   # 音声を離散フーリエ変換したデータ(右チャンネル)
+
 ---音声データを取得する
 ---@param buf table # 音声データ
 ---@param file string|"audiobuffer"
----@param type "pcm"|"spectrum"|"fourier"
+---@param type getaudio_types
 ---@param size integer
 ---@return integer # 要素数
 ---@return integer # サンプリングレート
@@ -697,7 +708,7 @@ function obj.getaudio(buf,file,type,size)end
 ---音声データを取得する
 ---@param buf nil
 ---@param file string|"audiobuffer"
----@param type "pcm"|"spectrum"|"fourier"
+---@param type getaudio_types
 ---@param size integer
 ---@return integer # 要素数
 ---@return integer # サンプリングレート
@@ -1068,6 +1079,13 @@ function obj.getinfo(name)end
 ---@param name "version"
 ---@return integer
 function obj.getinfo(name)end
+
+
+---スクリプトモジュール(.mod2)の関数を取得します。
+---@param name string # モジュール名(スクリプトモジュールのファイル名本体)
+---@return table # スクリプトモジュールの関数テーブル
+function obj.module(name)end
+
 
 ---連続した4点`p0,p1,p2,p3`から時間`t`に応じた`p1,p2`間の座標を返す
 ---@param t number

@@ -640,24 +640,24 @@ function obj.getvalue(target,time,section)end
 ---指定したレイヤーにあるオブジェクトの設定を取得する
 ---time = obj.time
 ---section = 0
----@param target string # "layer{番号}.{種類}"
----@return number|nil # 指定したレイヤーにオブジェクトが無い場合はnil
+---@param target string # `"layer{番号}.{種類}"`、`"layer{番号}"`
+---@return number|nil|boolean # 種類を指定しない場合はオブジェクトの有無がbooleanで返る。種類を指定した場合、指定したレイヤーにオブジェクトが無い場合は `nil` 、オブジェクトがあれば値が返る。
 ---@nodiscard
 function obj.getvalue(target)end
 
 ---指定したレイヤーにあるオブジェクトの設定を取得する
 ---section = 0
----@param target string # "layer{番号}.{種類}"
+---@param target string # `"layer{番号}.{種類}"`、`"layer{番号}"`
 ---@param time number # 基準時間
----@return number|nil # 指定したレイヤーにオブジェクトが無い場合はnil
+---@return number|nil|boolean # 種類を指定しない場合はオブジェクトの有無がbooleanで返る。種類を指定した場合、指定したレイヤーにオブジェクトが無い場合は `nil` 、オブジェクトがあれば値が返る。
 ---@nodiscard
 function obj.getvalue(target,time)end
 
 ---指定したレイヤーにあるオブジェクトの設定を取得する
----@param target string # "layer{番号}.{種類}"
+---@param target string # `"layer{番号}.{種類}"`、`"layer{番号}"`
 ---@param time number # 基準時間
 ---@param section integer # 基準区間
----@return number|nil # 指定したレイヤーにオブジェクトが無い場合はnil
+---@return number|nil|boolean # 種類を指定しない場合はオブジェクトの有無がbooleanで返る。種類を指定した場合、指定したレイヤーにオブジェクトが無い場合は `nil` 、オブジェクトがあれば値が返る。
 ---@nodiscard
 function obj.getvalue(target,time,section)end
 

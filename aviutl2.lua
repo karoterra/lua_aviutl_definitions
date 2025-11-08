@@ -925,9 +925,16 @@ function obj.putpixeldata(target,data,w,h,format)end
 
 
 ---@alias buffer_shader_name
----|'"object"'
----|'"tempbuffer"'
----|'"framebuffer"'
+---|'"object"'      # オブジェクト
+---|'"tempbuffer"'  # 仮想バッファ
+---|'"framebuffer"' # フレームバッファ
+---|buffer_cache_name
+
+---@alias shader_resource_name
+---|'"object"'      # オブジェクト
+---|'"tempbuffer"'  # 仮想バッファ
+---|'"framebuffer"' # フレームバッファ
+---|'"random"'      # 乱数バッファ(0.0～1.0の乱数値の256x256の領域、DXGI_FORMAT_R32_FLOAT、r値のみ)
 ---|buffer_cache_name
 
 ---@alias pixelshader_blend
@@ -946,20 +953,20 @@ function obj.putpixeldata(target,data,w,h,format)end
 ---ピクセルシェーダーを実行します。
 ---@param name string # シェーダーの登録名
 ---@param target buffer_shader_name # 出力先のバッファ名
----@param resource buffer_shader_name[] # 参照するバッファ名の配列
+---@param resource shader_resource_name[] # 参照するバッファ名の配列
 function obj.pixelshader(name,target,resource)end
 
 ---ピクセルシェーダーを実行します。
 ---@param name string # シェーダーの登録名
 ---@param target buffer_shader_name # 出力先のバッファ名
----@param resource buffer_shader_name[] # 参照するバッファ名の配列
+---@param resource shader_resource_name[] # 参照するバッファ名の配列
 ---@param constant number[] # 参照する定数の配列
 function obj.pixelshader(name,target,resource,constant)end
 
 ---ピクセルシェーダーを実行します。
 ---@param name string # シェーダーの登録名
 ---@param target buffer_shader_name # 出力先のバッファ名
----@param resource buffer_shader_name[] # 参照するバッファ名の配列
+---@param resource shader_resource_name[] # 参照するバッファ名の配列
 ---@param constant number[] # 参照する定数の配列
 ---@param blend pixelshader_blend # 出力先へのブレンド方法
 function obj.pixelshader(name,target,resource,constant,blend)end
@@ -967,7 +974,7 @@ function obj.pixelshader(name,target,resource,constant,blend)end
 ---ピクセルシェーダーを実行します。
 ---@param name string # シェーダーの登録名
 ---@param target buffer_shader_name # 出力先のバッファ名
----@param resource buffer_shader_name[] # 参照するバッファ名の配列
+---@param resource shader_resource_name[] # 参照するバッファ名の配列
 ---@param constant number[] # 参照する定数の配列
 ---@param blend pixelshader_blend # 出力先へのブレンド方法
 ---@param sampler pixelshader_sampler # サンプラーの種別
@@ -977,20 +984,20 @@ function obj.pixelshader(name,target,resource,constant,blend,sampler)end
 ---コンピュートシェーダーを実行します。
 ---@param name string # シェーダーの登録名
 ---@param target buffer_shader_name[] # 読み書き先のバッファ名の配列
----@param resource buffer_shader_name[] # 参照するバッファ名の配列
+---@param resource shader_resource_name[] # 参照するバッファ名の配列
 function obj.computeshader(name,target,resource)end
 
 ---コンピュートシェーダーを実行します。
 ---@param name string # シェーダーの登録名
 ---@param target buffer_shader_name[] # 読み書き先のバッファ名の配列
----@param resource buffer_shader_name[] # 参照するバッファ名の配列
+---@param resource shader_resource_name[] # 参照するバッファ名の配列
 ---@param constant number[] # 参照する定数の配列
 function obj.computeshader(name,target,resource,constant)end
 
 ---コンピュートシェーダーを実行します。
 ---@param name string # シェーダーの登録名
 ---@param target buffer_shader_name[] # 読み書き先のバッファ名の配列
----@param resource buffer_shader_name[] # 参照するバッファ名の配列
+---@param resource shader_resource_name[] # 参照するバッファ名の配列
 ---@param constant number[] # 参照する定数の配列
 ---@param countX integer # X軸スレッドグループ数
 function obj.computeshader(name,target,resource,constant,countX)end
@@ -998,7 +1005,7 @@ function obj.computeshader(name,target,resource,constant,countX)end
 ---コンピュートシェーダーを実行します。
 ---@param name string # シェーダーの登録名
 ---@param target buffer_shader_name[] # 読み書き先のバッファ名の配列
----@param resource buffer_shader_name[] # 参照するバッファ名の配列
+---@param resource shader_resource_name[] # 参照するバッファ名の配列
 ---@param constant number[] # 参照する定数の配列
 ---@param countX integer # X軸スレッドグループ数
 ---@param countY integer # Y軸スレッドグループ数
@@ -1007,12 +1014,23 @@ function obj.computeshader(name,target,resource,constant,countX,countY)end
 ---コンピュートシェーダーを実行します。
 ---@param name string # シェーダーの登録名
 ---@param target buffer_shader_name[] # 読み書き先のバッファ名の配列
----@param resource buffer_shader_name[] # 参照するバッファ名の配列
+---@param resource shader_resource_name[] # 参照するバッファ名の配列
 ---@param constant number[] # 参照する定数の配列
 ---@param countX integer # X軸スレッドグループ数
 ---@param countY integer # Y軸スレッドグループ数
 ---@param countZ integer # Z軸スレッドグループ数
 function obj.computeshader(name,target,resource,constant,countX,countY,countZ)end
+
+---コンピュートシェーダーを実行します。
+---@param name string # シェーダーの登録名
+---@param target buffer_shader_name[] # 読み書き先のバッファ名の配列
+---@param resource shader_resource_name[] # 参照するバッファ名の配列
+---@param constant number[] # 参照する定数の配列
+---@param countX integer # X軸スレッドグループ数
+---@param countY integer # Y軸スレッドグループ数
+---@param countZ integer # Z軸スレッドグループ数
+---@param sampler pixelshader_sampler # サンプラーの種別
+function obj.computeshader(name,target,resource,constant,countX,countY,countZ,sampler)end
 
 
 ---トラックバー変化方法スクリプトでのみ有効<br>トラックバーの値を取得する
@@ -1129,6 +1147,13 @@ function obj.getinfo(name)end
 ---@param name "version"
 ---@return integer
 function obj.getinfo(name)end
+
+
+---汎用データ領域を取得します。
+---@param name string # 汎用データ領域の登録名
+---@return lightuserdata # 汎用データ領域のポインタ
+---@nodiscard
+function obj.data(name)end
 
 
 ---スクリプトモジュール(.mod2)の関数を取得します。

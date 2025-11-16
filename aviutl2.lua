@@ -16,7 +16,7 @@
 ---|'"chroma"' # 色差
 ---|'"shadow"' # 陰影
 ---|'"light_dark"' # 明暗
----|'"diff"' # 色差
+---|'"diff"' # 差分
 ---|'"alpha_add"' # 色情報は加重平均、アルファ値は加算
 ---|'"alpha_max"' # 色情報は加重平均、アルファ値は最大値
 ---|'"alpha_sub"' # 色情報は無視、アルファ値は減算
@@ -95,6 +95,9 @@ local camera_param={}
 ---@field cx number # 中心座標(X)
 ---@field cy number # 中心座標(Y)
 ---@field cz number # 中心座標(Z)
+---@field sx number # 拡大率(X)
+---@field sy number # 拡大率(Y)
+---@field sz number # 拡大率(Z)
 ---@field zoom number  # 拡大率(等倍は1)
 ---@field alpha number # 不透明度(最大値は1)
 ---@field aspect aspect_number # 縦横比
@@ -641,6 +644,9 @@ function obj.getoption(name)end
 ---|'"cx"' # 基準中心座標(X)
 ---|'"cy"' # 基準中心座標(Y)
 ---|'"cz"' # 基準中心座標(Z)
+---|'"sx"' # 基準拡大率(X)
+---|'"sy"' # 基準拡大率(Y)
+---|'"sz"' # 基準拡大率(Z)
 ---|'"zoom"'   # 拡大率(等倍は*100*)
 ---|'"alpha"'  # 不透明度
 ---|'"aspect"' # 縦横比

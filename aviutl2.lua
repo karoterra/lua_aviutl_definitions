@@ -1110,12 +1110,25 @@ function obj.getpoint(target)end
 ---@nodiscard
 function obj.getpoint(target)end
 
+---@alias getpoint_timecontrol_option
+---|'"index"' # 時間制御を反映した区間での位置を取得
+---|'"time"'  # 時間制御を反映した時間を取得
+---|'"value"' # 時間制御の時間位置(開始点=0.0/終了点=1.0)を取得
+
 ---トラックバー変化方法スクリプトでのみ有効<br>時間制御を反映した現在の値を取得する
 ---@param target "timecontrol"
----@param option "index"|"time" # `"index"` = 時間制御を反映した区間での位置を取得, `"time"` = 時間制御を反映した時間を取得
+---@param option getpoint_timecontrol_option
 ---@return number
 ---@nodiscard
 function obj.getpoint(target,option)end
+
+---トラックバー変化方法スクリプトでのみ有効<br>時間制御を反映した現在の値を取得する
+---@param target "timecontrol"
+---@param option "value"
+---@param option2 number # 取得する時間
+---@return number
+---@nodiscard
+function obj.getpoint(target,option,option2)end
 
 ---トラックバー変化方法スクリプトでのみ有効<br>フレームレートを取得する
 ---@param target "framerate"

@@ -1145,6 +1145,12 @@ function obj.getpoint(target)end
 ---@nodiscard
 function obj.getinfo(name)end
 
+---フィルタオブジェクトの処理中かを調べる
+---@param name "filter"
+---@return boolean
+---@nodiscard
+function obj.getinfo(name)end
+
 ---動画の出力中かを取得する
 ---@param name "saving"
 ---@return boolean

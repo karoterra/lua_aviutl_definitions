@@ -1158,6 +1158,14 @@ function obj.getinfo(name)end
 ---@nodiscard
 function obj.getinfo(name)end
 
+---グリッド(BPM)の情報を取得する
+---@param name "bpm"
+---@return number tempo
+---@return integer beat
+---@return number offset
+---@nodiscard
+function obj.getinfo(name)end
+
 ---アプリ起動からの経過時間(秒)を取得する
 ---@param name "clock"
 ---@return number

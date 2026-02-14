@@ -787,6 +787,19 @@ function obj.clearbuffer(target)end
 ---@param color integer # 色(0x000000～0xffffff) ※未指定の場合は透明色
 function obj.clearbuffer(target,color)end
 
+---画像バッファのサイズを変更してクリアします。
+---@param target "object"|"tempbuffer"|buffer_cache_name # クリアするバッファ名(フレームバッファはサイズを変更出来ません)
+---@param w integer # 横のピクセル数
+---@param h integer # 縦のピクセル数
+function obj.clearbuffer(target,w,h)end
+
+---画像バッファのサイズを変更してクリアします。
+---@param target "object"|"tempbuffer"|buffer_cache_name # クリアするバッファ名(フレームバッファはサイズを変更出来ません)
+---@param w integer # 横のピクセル数
+---@param h integer # 縦のピクセル数
+---@param color integer # 色(0x000000～0xffffff) ※未指定の場合は透明色
+function obj.clearbuffer(target,w,h,color)end
+
 
 ---画像データのサイズを返す
 ---@return integer w

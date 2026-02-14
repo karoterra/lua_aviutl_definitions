@@ -564,6 +564,14 @@ function obj.setoption(name,cam)end
 ---|'"clip"' # 領域外は透明色
 ---|'"clamp"' # 領域外は一番外側の色
 ---|'"loop"' # 領域外はループ
+---|'"mirror"' # 領域外は領域を反転しながらループ
+---|'"dot"' # 拡大縮小補間をしない(領域外は透明色)
+
+---サンプラーモード
+---
+---`obj.draw()`, `obj.drawpoly()` 描画時のサンプラーをデフォルト設定に戻します
+---@param name "sampler"
+function obj.setoption(name)end
 
 ---サンプラーモード
 ---

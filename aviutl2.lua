@@ -1101,7 +1101,7 @@ function obj.getpoint(target)end
 
 ---トラックバー変化方法スクリプトでのみ有効<br>トラックバーの設定値(「移動フレーム間隔」)を取得する
 ---@param target "param"
----@return number
+---@return number ...
 ---@nodiscard
 function obj.getpoint(target)end
 

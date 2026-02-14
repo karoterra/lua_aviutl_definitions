@@ -319,6 +319,7 @@ function obj.drawpoly(vertex, vertex_num, alpha)end
 ---| '"movie"' # 動画ファイル(入力プラグインが解釈)
 ---| '"image"' # 画像ファイル(GDI+/Susieプラグインが解釈)
 ---| '"text"' # テキスト
+---| '"textlayout"' # テキストレイアウト
 ---| '"figure"' # 図形
 ---| '"framebuffer"' # フレームバッファ
 ---| '"tempbuffer"' # 仮想バッファ
@@ -360,6 +361,30 @@ function obj.load(type,text)end
 ---@param text string # 表示する内容
 ---@param speed number # 毎秒何文字表示するか
 ---@param time number # 何秒時点のものを表示するか
+---@see obj.setfont
+function obj.load(type,text,speed,time)end
+
+---obj.load("text")で読み込むテキストの画像サイズを取得する.
+---
+---現在のオブジェクトを更新しないでサイズを返却する。
+---@param type "textlayout"
+---@param text string # 表示する内容
+---@return integer w
+---@return integer h
+---@nodiscard
+---@see obj.setfont
+function obj.load(type,text)end
+
+---obj.load("text")で読み込むテキストの画像サイズを取得する。
+---
+---現在のオブジェクトを更新しないでサイズを返却する。
+---@param type "textlayout"
+---@param text string # 表示する内容
+---@param speed number # 毎秒何文字表示するか
+---@param time number # 何秒時点のものを表示するか
+---@return integer w
+---@return integer h
+---@nodiscard
 ---@see obj.setfont
 function obj.load(type,text,speed,time)end
 
@@ -453,6 +478,48 @@ function obj.setfont(name,size,type,col1)end
 ---@param col1 integer # 文字色
 ---@param col2 integer # 影/縁色
 function obj.setfont(name,size,type,col1,col2)end
+
+---`obj.load("text")`で使うフォント(書式)を変更する
+---@param name string # フォント名
+---@param size integer # サイズ
+---@param type setfont_type # 書式
+---@param col1 integer # 文字色
+---@param col2 integer # 影/縁色
+---@param bold boolean # 太字か？ (`true` = 太字 / `false` <デフォルト> = 通常)
+function obj.setfont(name,size,type,col1,col2,bold)end
+
+---`obj.load("text")`で使うフォント(書式)を変更する
+---@param name string # フォント名
+---@param size integer # サイズ
+---@param type setfont_type # 書式
+---@param col1 integer # 文字色
+---@param col2 integer # 影/縁色
+---@param bold boolean # 太字か？ (`true` = 太字 / `false` <デフォルト> = 通常)
+---@param italic boolean # 斜体か？ (`true` = 斜体 / `false` <デフォルト> = 通常)
+function obj.setfont(name,size,type,col1,col2,bold,italic)end
+
+---`obj.load("text")`で使うフォント(書式)を変更する
+---@param name string # フォント名
+---@param size integer # サイズ
+---@param type setfont_type # 書式
+---@param col1 integer # 文字色
+---@param col2 integer # 影/縁色
+---@param bold boolean # 太字か？ (`true` = 太字 / `false` <デフォルト> = 通常)
+---@param italic boolean # 斜体か？ (`true` = 斜体 / `false` <デフォルト> = 通常)
+---@param charspacing number # 文字間隔
+function obj.setfont(name,size,type,col1,col2,bold,italic,charspacing)end
+
+---`obj.load("text")`で使うフォント(書式)を変更する
+---@param name string # フォント名
+---@param size integer # サイズ
+---@param type setfont_type # 書式
+---@param col1 integer # 文字色
+---@param col2 integer # 影/縁色
+---@param bold boolean # 太字か？ (`true` = 太字 / `false` <デフォルト> = 通常)
+---@param italic boolean # 斜体か？ (`true` = 斜体 / `false` <デフォルト> = 通常)
+---@param charspacing number # 文字間隔
+---@param linespacing number # 行間隔
+function obj.setfont(name,size,type,col1,col2,bold,italic,charspacing,linespacing)end
 
 
 ---同じパラメータを渡せば同じ結果が返る乱数関数
@@ -711,6 +778,30 @@ function obj.getvalue(target,time)end
 ---@return number|nil|boolean # 種類を指定しない場合はオブジェクトの有無がbooleanで返る。種類を指定した場合、指定したレイヤーにオブジェクトが無い場合は `nil` 、オブジェクトがあれば値が返る。
 ---@nodiscard
 function obj.getvalue(target,time,section)end
+
+---現在のオブジェクトの設定値を取得します。
+---@param effect string # 対象のエフェクト名 (エイリアスファイルのeffect.nameの値)。同じエフェクトが複数ある場合は":n"のサフィックスでインデックス指定出来ます (nは0からの番号)
+---@param item string # 対象の設定項目の名称 (エイリアスファイルのキーの名称) ※名称が数値の場合は利用出来ません
+---@return number|string|nil # トラックバーの場合は指定時間の設定値。トラックバー以外の場合はエイリアスファイルの設定値と同じフォーマットの値。
+---@nodiscard
+function obj.getvalue(effect,item)end
+
+---現在のオブジェクトの設定値を取得します。
+---@param effect string # 対象のエフェクト名 (エイリアスファイルのeffect.nameの値)。同じエフェクトが複数ある場合は":n"のサフィックスでインデックス指定出来ます (nは0からの番号)
+---@param item string # 対象の設定項目の名称 (エイリアスファイルのキーの名称) ※名称が数値の場合は利用出来ません
+---@param time number # どの時点の値を取得するかの時間(秒)(省略時は現時間)
+---@return number|string|nil # トラックバーの場合は指定時間の設定値。トラックバー以外の場合はエイリアスファイルの設定値と同じフォーマットの値。
+---@nodiscard
+function obj.getvalue(effect,item,time)end
+
+---現在のオブジェクトの設定値を取得します。
+---@param effect string # 対象のエフェクト名 (エイリアスファイルのeffect.nameの値)。同じエフェクトが複数ある場合は":n"のサフィックスでインデックス指定出来ます (nは0からの番号)
+---@param item string # 対象の設定項目の名称 (エイリアスファイルのキーの名称) ※名称が数値の場合は利用出来ません
+---@param time number # どの時点の値を取得するかの時間(秒)(省略時は現時間)
+---@param section integer # 時間の基準となる区間の番号(省略時は開始点) (0=開始点 / 1=最初の中間点 / 2=2個目の中間点 / -1=終了点)
+---@return number|string|nil # トラックバーの場合は指定時間の設定値。トラックバー以外の場合はエイリアスファイルの設定値と同じフォーマットの値。
+---@nodiscard
+function obj.getvalue(effect,item,time,section)end
 
 
 ---@alias setanchor_name

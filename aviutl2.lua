@@ -662,6 +662,7 @@ function obj.getoption(name)end
 ---|'"frame_s"' # 全体基準のオブジェクトの開始フレーム(0からの整数)
 ---|'"frame_e"' # 全体基準のオブジェクトの終了フレーム(0からの整数)
 ---|'"scenechange"' # シーンチェンジの進行度 (`[0,1]`)
+---|string # `"track.xxx"` = 変数名xxxのトラックバーの値
 
 ---標準/拡張描画等の設定を取得する
 ---time = obj.time

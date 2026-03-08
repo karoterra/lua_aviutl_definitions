@@ -21,6 +21,7 @@
 ---|'"alpha_max"' # 色情報は加重平均、アルファ値は最大値
 ---|'"alpha_sub"' # 色情報は無視、アルファ値は減算
 ---|'"alpha_add2"' # 色情報は重ね合わせ、アルファ値は加算
+---|'"rgba_add"' # RGBA値を単純に加算 ※Direct3DのBlendStateのみの処理なので軽い
 ---|`0` # 通常
 ---|`1` # 加算
 ---|`2` # 減算
@@ -617,9 +618,13 @@ function obj.setoption(name,value,w,h)end
 ---@param flag boolean
 function obj.setoption(name,flag)end
 
+---@alias focus_mode_value
+---|'"fixed_size"' # 大きさ固定の枠にする
+---|'"no_resize"' # リサイズ無しの枠にする
+
 ---オブジェクトのフォーカス枠モード
 ---@param name "focus_mode"
----@param value "fixed_size"
+---@param value focus_mode_value
 function obj.setoption(name,value)end
 
 ---カメラのパラメータを設定する
@@ -809,13 +814,18 @@ function obj.getvalue(effect,item,time,section)end
 ---|'"track"' # トラックバーを上から使う
 
 ---@alias setanchor_options
----|'"line"'
----|'"loop"'
----|'"star"'
----|'"arm"'
----|'"color"'
----|'"inout"'
----|'"xyz"'
+---|'"line"' # アンカーポイントを線で結ぶ
+---|'"loop"' # アンカーポイントを線で結び一周させる
+---|'"star"' # アンカーポイントをオブジェクトの中心とそれぞれ線で結ぶ
+---|'"arm"' # アンカーポイントとオブジェクトの中心を線で結ぶ
+---|'"mesh"' # アンカーポイントを網目状に線で結ぶ ※後続引数：横数, 縦数
+---|'"color"' # 線の色(RGB)を変更する ※後続引数：色(0x000000～0xffffff)
+---|'"rgba"' # 線の色(RGBA)を変更する ※後続引数：色(0x00000000～0xffffffff)
+---|'"inout"' # 上記オプションの線の表示をIN,OUT側の2個として表示する(アンカー数は半々)
+---|'"xyz"' # アンカーポイントを3D座標で制御する ※デフォルトは2D座標
+---|'"small"' # 小さいアンカーポイントで表示する
+---|integer
+---|table
 
 ---アンカーポイントを設定する
 ---@param name setanchor_name # 参照するグローバル変数の名前
@@ -1303,6 +1313,11 @@ function obj.getinfo(name)end
 ---@nodiscard
 function obj.data(name)end
 
+
+---オブジェクトを個別オブジェクトとして複数描画します。
+---@param num integer # 描画する個別オブジェクトの数
+---@param func function # オブジェクトの描画処理のコールバック関数 (描画する回数呼ばれる)
+function obj.multiobject(num,func)end
 
 ---スクリプトモジュール(.mod2)の関数を取得します。
 ---@param name string # モジュール名(スクリプトモジュールのファイル名本体)

@@ -812,6 +812,7 @@ function obj.getvalue(effect,item,time,section)end
 ---@alias setanchor_name
 ---|string
 ---|'"track"' # トラックバーを上から使う
+---|table
 
 ---@alias setanchor_options
 ---|'"line"' # アンカーポイントを線で結ぶ
@@ -828,7 +829,7 @@ function obj.getvalue(effect,item,time,section)end
 ---|table
 
 ---アンカーポイントを設定する
----@param name setanchor_name # 参照するグローバル変数の名前
+---@param name setanchor_name # --value、--dialogの配列で定義されている座標を格納する変数名を指定する。"track"を指定すると--track0から指定されているトラックバーの始点終点中間点の値を参照する。変数名をカンマ区切りで2か3項目列挙した場合は--track@xxxで定義されている各トラックバーの始点終点中間点の値を参照する。直接テーブル変数名を指定するとアンカー表示や移動なしで線だけを表示する。
 ---@param num integer # アンカーポイントの数
 ---@param ... setanchor_options # オプションを列挙する
 ---@return integer # アンカーポイントの数
@@ -1253,6 +1254,12 @@ function obj.getpoint(target,option,option2)end
 ---@nodiscard
 function obj.getpoint(target)end
 
+---トラックバー変化方法スクリプトでのみ有効<br>トラックバーの標準値を取得する
+---@param target "default"
+---@return number
+---@nodiscard
+function obj.getpoint(target)end
+
 
 ---スクリプトフォルダのパス(`{exedit.auf dir}/script/`)を取得する
 ---@param name "script_path"
@@ -1518,9 +1525,33 @@ function rand1(seed)end
 function rand1(seed,frame)end
 
 
----指定の内容をログに出力する
----@param text string
-function debug_print(text)end
+---@alias debug_print_level
+---|'"@info"' # info レベル指定
+---|'"@warn"' # warn レベル指定
+---|'"@error"' # error レベル指定
+---|'"@verbose"' # verbose レベル指定
+
+---指定の文字列をログに出力します。
+---引数が複数の場合は連結して出力します。
+---@param level debug_print_level # ログレベル
+---@param ... any
+function debug_print(level,...)end
+
+---指定の文字列をログに出力します。
+---引数が複数の場合は連結して出力します。
+---@param ... any
+function debug_print(...)end
+
+---指定の文字列をログに出力します。
+---引数が複数の場合は連結して出力します。
+---@param level debug_print_level # ログレベル
+---@param ... any
+function print(level,...)end
+
+---指定の文字列をログに出力します。
+---引数が複数の場合は連結して出力します。
+---@param ... any
+function print(...)end
 
 --[[
 Copyright (C) 2024 ePi

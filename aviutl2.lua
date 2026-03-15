@@ -1242,7 +1242,7 @@ function obj.getpoint(target,option)end
 
 ---トラックバー変化方法スクリプトでのみ有効<br>時間制御を反映した現在の値を取得する
 ---@param target "timecontrol"
----@param option "value"
+---@param option getpoint_timecontrol_option
 ---@param option2 number # 取得する時間
 ---@return number
 ---@nodiscard

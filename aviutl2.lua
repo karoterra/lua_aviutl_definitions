@@ -1085,20 +1085,20 @@ function obj.putpixeldata(target,data,w,h,format)end
 ---ピクセルシェーダーを実行します。
 ---@param name string # シェーダーの登録名
 ---@param target buffer_shader_name # 出力先のバッファ名
----@param resource shader_resource_name[] # 参照するバッファ名の配列
+---@param resource shader_resource_name | shader_resource_name[] # 参照するバッファ名またはその配列
 function obj.pixelshader(name,target,resource)end
 
 ---ピクセルシェーダーを実行します。
 ---@param name string # シェーダーの登録名
 ---@param target buffer_shader_name # 出力先のバッファ名
----@param resource shader_resource_name[] # 参照するバッファ名の配列
+---@param resource shader_resource_name | shader_resource_name[] # 参照するバッファ名またはその配列
 ---@param constant number[] # 参照する定数の配列
 function obj.pixelshader(name,target,resource,constant)end
 
 ---ピクセルシェーダーを実行します。
 ---@param name string # シェーダーの登録名
 ---@param target buffer_shader_name # 出力先のバッファ名
----@param resource shader_resource_name[] # 参照するバッファ名の配列
+---@param resource shader_resource_name | shader_resource_name[] # 参照するバッファ名またはその配列
 ---@param constant number[] # 参照する定数の配列
 ---@param blend pixelshader_blend # 出力先へのブレンド方法
 function obj.pixelshader(name,target,resource,constant,blend)end
@@ -1106,7 +1106,7 @@ function obj.pixelshader(name,target,resource,constant,blend)end
 ---ピクセルシェーダーを実行します。
 ---@param name string # シェーダーの登録名
 ---@param target buffer_shader_name # 出力先のバッファ名
----@param resource shader_resource_name[] # 参照するバッファ名の配列
+---@param resource shader_resource_name | shader_resource_name[] # 参照するバッファ名またはその配列
 ---@param constant number[] # 参照する定数の配列
 ---@param blend pixelshader_blend # 出力先へのブレンド方法
 ---@param sampler pixelshader_sampler # サンプラーの種別
@@ -1115,29 +1115,29 @@ function obj.pixelshader(name,target,resource,constant,blend,sampler)end
 
 ---コンピュートシェーダーを実行します。
 ---@param name string # シェーダーの登録名
----@param target buffer_shader_name[] # 読み書き先のバッファ名の配列
----@param resource shader_resource_name[] # 参照するバッファ名の配列
+---@param target buffer_shader_name | buffer_shader_name[] # 読み書き先のバッファ名またはその配列
+---@param resource shader_resource_name | shader_resource_name[] # 参照するバッファ名またはその配列
 function obj.computeshader(name,target,resource)end
 
 ---コンピュートシェーダーを実行します。
 ---@param name string # シェーダーの登録名
----@param target buffer_shader_name[] # 読み書き先のバッファ名の配列
----@param resource shader_resource_name[] # 参照するバッファ名の配列
+---@param target buffer_shader_name | buffer_shader_name[] # 読み書き先のバッファ名またはその配列
+---@param resource shader_resource_name | shader_resource_name[] # 参照するバッファ名またはその配列
 ---@param constant number[] # 参照する定数の配列
 function obj.computeshader(name,target,resource,constant)end
 
 ---コンピュートシェーダーを実行します。
 ---@param name string # シェーダーの登録名
----@param target buffer_shader_name[] # 読み書き先のバッファ名の配列
----@param resource shader_resource_name[] # 参照するバッファ名の配列
+---@param target buffer_shader_name | buffer_shader_name[] # 読み書き先のバッファ名またはその配列
+---@param resource shader_resource_name | shader_resource_name[] # 参照するバッファ名またはその配列
 ---@param constant number[] # 参照する定数の配列
 ---@param countX integer # X軸スレッドグループ数
 function obj.computeshader(name,target,resource,constant,countX)end
 
 ---コンピュートシェーダーを実行します。
 ---@param name string # シェーダーの登録名
----@param target buffer_shader_name[] # 読み書き先のバッファ名の配列
----@param resource shader_resource_name[] # 参照するバッファ名の配列
+---@param target buffer_shader_name | buffer_shader_name[] # 読み書き先のバッファ名またはその配列
+---@param resource shader_resource_name | shader_resource_name[] # 参照するバッファ名またはその配列
 ---@param constant number[] # 参照する定数の配列
 ---@param countX integer # X軸スレッドグループ数
 ---@param countY integer # Y軸スレッドグループ数
@@ -1145,8 +1145,8 @@ function obj.computeshader(name,target,resource,constant,countX,countY)end
 
 ---コンピュートシェーダーを実行します。
 ---@param name string # シェーダーの登録名
----@param target buffer_shader_name[] # 読み書き先のバッファ名の配列
----@param resource shader_resource_name[] # 参照するバッファ名の配列
+---@param target buffer_shader_name | buffer_shader_name[] # 読み書き先のバッファ名またはその配列
+---@param resource shader_resource_name | shader_resource_name[] # 参照するバッファ名またはその配列
 ---@param constant number[] # 参照する定数の配列
 ---@param countX integer # X軸スレッドグループ数
 ---@param countY integer # Y軸スレッドグループ数
@@ -1155,8 +1155,8 @@ function obj.computeshader(name,target,resource,constant,countX,countY,countZ)en
 
 ---コンピュートシェーダーを実行します。
 ---@param name string # シェーダーの登録名
----@param target buffer_shader_name[] # 読み書き先のバッファ名の配列
----@param resource shader_resource_name[] # 参照するバッファ名の配列
+---@param target buffer_shader_name | buffer_shader_name[] # 読み書き先のバッファ名またはその配列
+---@param resource shader_resource_name | shader_resource_name[] # 参照するバッファ名またはその配列
 ---@param constant number[] # 参照する定数の配列
 ---@param countX integer # X軸スレッドグループ数
 ---@param countY integer # Y軸スレッドグループ数

@@ -955,6 +955,34 @@ function XOR(a,b)end
 function SHIFT(a,b)end
 
 
+---同じパラメータを渡せば同じ結果が返る乱数関数
+---seed = 0
+---frame = obj.frame
+---@param st_num integer # 範囲の最小値(閉区間)
+---@param ed_num integer # 範囲の最大値(閉区間)
+---@return number
+---@nodiscard
+function rand(st_num,ed_num)end
+
+---同じパラメータを渡せば同じ結果が返る乱数関数
+---frame = obj.frame
+---@param st_num integer # 範囲の最小値(閉区間)
+---@param ed_num integer # 範囲の最大値(閉区間)
+---@param seed integer # シード値
+---@return number
+---@nodiscard
+function rand(st_num,ed_num,seed)end
+
+---同じパラメータを渡せば同じ結果が返る乱数関数
+---@param st_num integer # 範囲の最小値(閉区間)
+---@param ed_num integer # 範囲の最大値(閉区間)
+---@param seed integer # シード値
+---@param frame integer # シード値2
+---@return number
+---@nodiscard
+function rand(st_num,ed_num,seed,frame)end
+
+
 ---指定の内容をOutputDebugStringする
 ---@param text string
 function debug_print(text)end

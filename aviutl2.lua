@@ -1491,6 +1491,34 @@ function SHIFT(a,b)end
 function rotation(x0,y0,x1,y1,x2,y2,x3,y3,zoom,r)end
 
 
+---同じパラメータを渡せば同じ結果が返る乱数関数
+---seed = 0
+---frame = obj.frame
+---@param st_num integer # 範囲の最小値(閉区間)
+---@param ed_num integer # 範囲の最大値(閉区間)
+---@return number
+---@nodiscard
+function rand(st_num,ed_num)end
+
+---同じパラメータを渡せば同じ結果が返る乱数関数
+---frame = obj.frame
+---@param st_num integer # 範囲の最小値(閉区間)
+---@param ed_num integer # 範囲の最大値(閉区間)
+---@param seed integer # シード値
+---@return number
+---@nodiscard
+function rand(st_num,ed_num,seed)end
+
+---同じパラメータを渡せば同じ結果が返る乱数関数
+---@param st_num integer # 範囲の最小値(閉区間)
+---@param ed_num integer # 範囲の最大値(閉区間)
+---@param seed integer # シード値
+---@param frame integer # シード値2
+---@return number
+---@nodiscard
+function rand(st_num,ed_num,seed,frame)end
+
+
 ---0.0以上1.0未満の乱数を発生させます。通常の乱数と異なり同一時間のフレームで常に同じ値が出るように乱数を発生させます。
 ---
 ---シードは省略するとオブジェクト毎に異なる乱数になります。

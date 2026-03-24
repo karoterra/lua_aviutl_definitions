@@ -1260,6 +1260,13 @@ function obj.getpoint(target)end
 ---@nodiscard
 function obj.getpoint(target)end
 
+---トラックバー変化方法スクリプトでのみ有効<br>トラックバーの標準値を取得する
+---@param target "default"
+---@param option string # 移動モード名称（直線移動、補間移動など）
+---@return number
+---@nodiscard
+function obj.getpoint(target,option)end
+
 
 ---スクリプトフォルダのパス(`{exedit.auf dir}/script/`)を取得する
 ---@param name "script_path"

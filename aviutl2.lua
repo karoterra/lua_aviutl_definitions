@@ -318,8 +318,11 @@ function obj.drawpoly(vertex, vertex_num, alpha)end
 
 ---@alias load_option
 ---| '"movie"' # 動画ファイル(入力プラグインが解釈)
+---| '"movie.frame"' # 動画ファイル(フレーム番号指定、入力プラグインが解釈)
+---| '"movie.info"' # 動画ファイル情報(入力プラグインが解釈)
 ---| '"image"' # 画像ファイル(GDI+/Susieプラグインが解釈)
 ---| '"text"' # テキスト
+---| '"text.layout"' # テキストレイアウト
 ---| '"textlayout"' # テキストレイアウト
 ---| '"figure"' # 図形
 ---| '"framebuffer"' # フレームバッファ
@@ -340,9 +343,32 @@ function obj.load(type,file,time)end
 ---@return number # 動画の長さ[秒]
 function obj.load(type,file)end
 
+---入力プラグインにファイルを読み込ませて、内容をオブジェクトの画像データへデコードする
+---@param type "movie.frame"
+---@param file string # ファイルへのパス
+---@param frame number # 読み込むフレーム番号
+---@return number # 動画の長さ[フレーム]
+function obj.load(type,file,frame)end
+
+---入力プラグインにファイルを読み込ませて、内容をオブジェクトの画像データへデコードする
+---@param type "movie.frame"
+---@param file string # ファイルへのパス
+---@return number # 動画の長さ[秒]
+function obj.load(type,file)end
+
+---動画ファイルの情報を取得します。
+---現在のオブジェクト情報を更新しないで情報の返却のみをします。
+---@param type "movie.info"
+---@param file string # ファイルへのパス
+---@return number frame # 動画のフレーム数
+---@return number rate # 動画のフレームレート(rate)
+---@return number scale # 動画のフレームレート(scale)
+function obj.load(type,file)end
+
 ---GDI+/Susieプラグインにファイルを読み込ませて、内容をオブジェクトの画像データへデコードする
 ---@param type "image"
 ---@param file string # ファイルへのパス
+---@return boolean # 読み込みに成功したか
 function obj.load(type,file)end
 
 ---@alias load_text_align
@@ -371,6 +397,7 @@ function obj.load(type,file)end
 ---フォントなどは`obj.setfont`で指定する
 ---@param type "text"
 ---@param text string # 表示する内容
+---@return boolean # 読み込みに成功したか
 ---@see obj.setfont
 function obj.load(type,text)end
 
@@ -382,6 +409,7 @@ function obj.load(type,text)end
 ---@param text string # 表示する内容
 ---@param speed number # 毎秒何文字表示するか
 ---@param time number # 何秒時点のものを表示するか
+---@return boolean # 読み込みに成功したか
 ---@see obj.setfont
 function obj.load(type,text,speed,time)end
 
@@ -393,13 +421,14 @@ function obj.load(type,text,speed,time)end
 ---@param speed number # 毎秒何文字表示するか
 ---@param time number # 何秒時点のものを表示するか
 ---@param align load_text_align # 文字揃え種別
+---@return boolean # 読み込みに成功したか
 ---@see obj.setfont
 function obj.load(type,text,speed,time,align)end
 
 ---obj.load("text")で読み込むテキストの画像サイズを取得する。
 ---
 ---現在のオブジェクトを更新しないでサイズを返却する。
----@param type "textlayout"
+---@param type "text.layout"|"textlayout"
 ---@param text string # 表示する内容
 ---@return integer w
 ---@return integer h
@@ -410,7 +439,7 @@ function obj.load(type,text)end
 ---obj.load("text")で読み込むテキストの画像サイズを取得する。
 ---
 ---現在のオブジェクトを更新しないでサイズを返却する。
----@param type "textlayout"
+---@param type "text.layout"|"textlayout"
 ---@param text string # 表示する内容
 ---@param speed number # 毎秒何文字表示するか
 ---@param time number # 何秒時点のものを表示するか
@@ -423,7 +452,7 @@ function obj.load(type,text,speed,time)end
 ---obj.load("text")で読み込むテキストの画像サイズを取得する。
 ---
 ---現在のオブジェクトを更新しないでサイズを返却する。
----@param type "textlayout"
+---@param type "text.layout"|"textlayout"
 ---@param text string # 表示する内容
 ---@param speed number # 毎秒何文字表示するか
 ---@param time number # 何秒時点のものを表示するか
@@ -451,10 +480,12 @@ function obj.load(type,text,speed,time,align)end
 ---@param size integer # サイズ
 ---@param line integer # ライン幅
 ---@param round boolean # 角を丸くする
+---@return boolean # 読み込みに成功したか
 function obj.load(type,name,color,size,line,round)end
 
 ---フレームバッファを読み込む
 ---@param type "framebuffer"
+---@return boolean # 読み込みに成功したか
 function obj.load(type)end
 
 ---`(x,y)`から`(x+w,y+h)`までの矩形範囲のフレームバッファを読み込む
@@ -464,10 +495,12 @@ function obj.load(type)end
 ---@param w integer
 ---@param h integer
 ---@param alpha? boolean アルファチャンネルを維持 (`true` = する / `false` <デフォルト> = しない)
+---@return boolean # 読み込みに成功したか
 function obj.load(type,x,y,w,h,alpha)end
 
 ---仮想バッファを読み込む
 ---@param type "tempbuffer"
+---@return boolean # 読み込みに成功したか
 function obj.load(type)end
 
 ---`(x,y)`から`(x+w,y+h)`までの矩形範囲の仮想バッファを読み込む
@@ -476,17 +509,20 @@ function obj.load(type)end
 ---@param y integer
 ---@param w integer
 ---@param h integer
+---@return boolean # 読み込みに成功したか
 function obj.load(type,x,y,w,h)end
 
 ---指定した番号のレイヤーのオブジェクトを読み込む
 ---@param type "layer"
 ---@param no integer # レイヤー番号(1～)
 ---@param effect? boolean # エフェクトを適用するか(`true` = する / `false` <デフォルト> = しない )
+---@return boolean # 読み込みに成功したか
 function obj.load(type,no,effect)end
 
 ---カスタムオブジェクト中でのみ有効<br>
 ---直前オブジェクトを読み込む
 ---@param type "before"
+---@return boolean # 読み込みに成功したか
 function obj.load(type)end
 
 

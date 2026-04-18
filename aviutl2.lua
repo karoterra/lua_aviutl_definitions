@@ -345,6 +345,26 @@ function obj.load(type,file)end
 ---@param file string # ファイルへのパス
 function obj.load(type,file)end
 
+---@alias load_text_align
+---|`0`  # 左寄[上]
+---|`1`  # 中央[上]
+---|`2`  # 右寄[上]
+---|`3`  # 左寄[中]
+---|`4`  # 中央[中]
+---|`5`  # 右寄[中]
+---|`6`  # 左寄[下]
+---|`7`  # 中央[下]
+---|`8`  # 右寄[下]
+---|`9`  # 縦書 上段[右]
+---|`10` # 縦書 中段[右]
+---|`11` # 縦書 下段[右]
+---|`12` # 縦書 上段[中]
+---|`13` # 縦書 中段[中]
+---|`14` # 縦書 下段[中]
+---|`15` # 縦書 上段[左]
+---|`16` # 縦書 中段[左]
+---|`17` # 縦書 下段[左]
+
 ---テキストをオブジェクトの画像データへレンダリングする
 ---データは中央揃え[中]になる
 ---テキストには制御文字を含めることができる
@@ -365,7 +385,18 @@ function obj.load(type,text)end
 ---@see obj.setfont
 function obj.load(type,text,speed,time)end
 
----obj.load("text")で読み込むテキストの画像サイズを取得する.
+---テキストをオブジェクトの画像データへレンダリングする
+---テキストには制御文字を含めることができる
+---フォントなどは`obj.setfont`で指定する
+---@param type "text"
+---@param text string # 表示する内容
+---@param speed number # 毎秒何文字表示するか
+---@param time number # 何秒時点のものを表示するか
+---@param align load_text_align # 文字揃え種別
+---@see obj.setfont
+function obj.load(type,text,speed,time,align)end
+
+---obj.load("text")で読み込むテキストの画像サイズを取得する。
 ---
 ---現在のオブジェクトを更新しないでサイズを返却する。
 ---@param type "textlayout"
@@ -388,6 +419,20 @@ function obj.load(type,text)end
 ---@nodiscard
 ---@see obj.setfont
 function obj.load(type,text,speed,time)end
+
+---obj.load("text")で読み込むテキストの画像サイズを取得する。
+---
+---現在のオブジェクトを更新しないでサイズを返却する。
+---@param type "textlayout"
+---@param text string # 表示する内容
+---@param speed number # 毎秒何文字表示するか
+---@param time number # 何秒時点のものを表示するか
+---@param align load_text_align # 文字揃え種別
+---@return integer w
+---@return integer h
+---@nodiscard
+---@see obj.setfont
+function obj.load(type,text,speed,time,align)end
 
 ---@alias figure_name
 ---|'"背景"'
@@ -736,6 +781,12 @@ function obj.getoption(name)end
 ---|'"scenechange"' # シーンチェンジの進行度 (`[0,1]`)
 ---|string # `"track.xxx"` = 変数名xxxのトラックバーの値
 
+---@alias getvalue_tuple_target
+---|'"pos"' # 基準座標 (x,y,z)
+---|'"angle"' # 基準回転角度 (rx,ry,rz)
+---|'"center"' # 基準中心座標 (cx,cy,cz)
+---|'"scale"' # 基準拡大率 (sx,sy,sz)
+
 ---標準/拡張描画等の設定を取得する
 ---time = obj.time
 ---section = 0
@@ -756,6 +807,36 @@ function obj.getvalue(target,time)end
 ---@param target getvalue_target
 ---@param time number # 基準時間
 ---@param section integer # 基準区間
+---@return number
+---@nodiscard
+function obj.getvalue(target,time,section)end
+
+---標準/拡張描画等の設定を取得する
+---time = obj.time
+---section = 0
+---@param target getvalue_tuple_target
+---@return number
+---@return number
+---@return number
+---@nodiscard
+function obj.getvalue(target)end
+
+---標準/拡張描画等の設定を取得する
+---section = 0
+---@param target getvalue_tuple_target
+---@param time number # 基準時間
+---@return number
+---@return number
+---@return number
+---@nodiscard
+function obj.getvalue(target,time)end
+
+---標準/拡張描画等の設定を取得する
+---@param target getvalue_tuple_target
+---@param time number # 基準時間
+---@param section integer # 基準区間
+---@return number
+---@return number
 ---@return number
 ---@nodiscard
 function obj.getvalue(target,time,section)end

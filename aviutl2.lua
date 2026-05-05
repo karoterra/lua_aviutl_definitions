@@ -449,7 +449,7 @@ function obj.load(type,text)end
 ---@see obj.setfont
 function obj.load(type,text,speed,time)end
 
----obj.load("text")で読み込むテキストの画像サイズを取得する。
+---obj.load("text")で読み込むテキストの画像サイズと中心座標を取得する。
 ---
 ---現在のオブジェクトを更新しないでサイズを返却する。
 ---@param type "text.layout"|"textlayout"
@@ -459,6 +459,8 @@ function obj.load(type,text,speed,time)end
 ---@param align load_text_align # 文字揃え種別
 ---@return integer w
 ---@return integer h
+---@return integer cx
+---@return integer cy
 ---@nodiscard
 ---@see obj.setfont
 function obj.load(type,text,speed,time,align)end

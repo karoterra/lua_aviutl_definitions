@@ -1,5 +1,8 @@
 ---@meta
 
+---@type table<string, string>
+global = {}
+
 ---@alias aspect_number number 縦横比を表す<br>[-1,1]を取り、正値は幅が高さより短く、負は高さが幅より短く、(1-絶対値)は短辺の長辺からの割合
 ---@alias bool_int `0`|`1`
 
@@ -906,7 +909,7 @@ function obj.getvalue(target,time,section)end
 ---現在のオブジェクトの設定値を取得します。
 ---@param effect string # 対象のエフェクト名 (エイリアスファイルのeffect.nameの値)。同じエフェクトが複数ある場合は":n"のサフィックスでインデックス指定出来ます (nは0からの番号)
 ---@param item string # 対象の設定項目の名称 (エイリアスファイルのキーの名称) ※名称が数値の場合は利用出来ません
----@return number|string|nil # トラックバーの場合は指定時間の設定値。トラックバー以外の場合はエイリアスファイルの設定値と同じフォーマットの値。
+---@return number|string|boolean|nil # トラックバーの場合は指定時間の設定値、セクション毎チェックボックスの場合は指定時間のセクションの設定値、それ以外の場合はエイリアスファイルの設定値と同じフォーマットの値。
 ---@nodiscard
 function obj.getvalue(effect,item)end
 
@@ -914,7 +917,7 @@ function obj.getvalue(effect,item)end
 ---@param effect string # 対象のエフェクト名 (エイリアスファイルのeffect.nameの値)。同じエフェクトが複数ある場合は":n"のサフィックスでインデックス指定出来ます (nは0からの番号)
 ---@param item string # 対象の設定項目の名称 (エイリアスファイルのキーの名称) ※名称が数値の場合は利用出来ません
 ---@param time number # どの時点の値を取得するかの時間(秒)(省略時は現時間)
----@return number|string|nil # トラックバーの場合は指定時間の設定値。トラックバー以外の場合はエイリアスファイルの設定値と同じフォーマットの値。
+---@return number|string|boolean|nil # トラックバーの場合は指定時間の設定値、セクション毎チェックボックスの場合は指定時間のセクションの設定値、それ以外の場合はエイリアスファイルの設定値と同じフォーマットの値。
 ---@nodiscard
 function obj.getvalue(effect,item,time)end
 
@@ -923,7 +926,7 @@ function obj.getvalue(effect,item,time)end
 ---@param item string # 対象の設定項目の名称 (エイリアスファイルのキーの名称) ※名称が数値の場合は利用出来ません
 ---@param time number # どの時点の値を取得するかの時間(秒)(省略時は現時間)
 ---@param section integer # 時間の基準となる区間の番号(省略時は開始点) (0=開始点 / 1=最初の中間点 / 2=2個目の中間点 / -1=終了点)
----@return number|string|nil # トラックバーの場合は指定時間の設定値。トラックバー以外の場合はエイリアスファイルの設定値と同じフォーマットの値。
+---@return number|string|boolean|nil # トラックバーの場合は指定時間の設定値、セクション毎チェックボックスの場合は指定時間のセクションの設定値、それ以外の場合はエイリアスファイルの設定値と同じフォーマットの値。
 ---@nodiscard
 function obj.getvalue(effect,item,time,section)end
 

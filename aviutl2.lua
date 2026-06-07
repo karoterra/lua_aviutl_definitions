@@ -943,6 +943,7 @@ function obj.getvalue(effect,item,time,section)end
 ---|'"rgba"' # 線の色(RGBA)を変更する ※後続引数：色(0x00000000～0xffffffff)
 ---|'"inout"' # 上記オプションの線の表示をIN,OUT側の2個として表示する(アンカー数は半々)
 ---|'"xyz"' # アンカーポイントを3D座標で制御する ※デフォルトは2D座標
+---|'"screen"' # スクリーン座標で制御する ※デフォルトはオブジェクト座標
 ---|'"small"' # 小さいアンカーポイントで表示する
 ---|integer
 ---|table

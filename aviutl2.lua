@@ -1620,14 +1620,6 @@ function SHIFT(a,b)end
 ---@nodiscard
 function rotation(x0,y0,x1,y1,x2,y2,x3,y3,zoom,r)end
 
----@alias setfont_type
----|0 # 標準文字
----|1 # 影付き文字
----|2 # 影付き文字(薄)
----|3 # 縁取り文字
----|4 # 縁取り文字(細)
----|5 # 縁取り文字(太)
----|6 # 縁取り文字(角)
 
 ---`obj.load("text")`で使うフォント(書式)を変更する
 ---@param name string # フォント名

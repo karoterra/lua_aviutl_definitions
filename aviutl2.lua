@@ -1621,6 +1621,75 @@ function SHIFT(a,b)end
 function rotation(x0,y0,x1,y1,x2,y2,x3,y3,zoom,r)end
 
 
+---`obj.load("text")`で使うフォント(書式)を変更する
+---@param name string # フォント名
+---@param size integer # サイズ
+function setfont(name,size)end
+
+---`obj.load("text")`で使うフォント(書式)を変更する
+---@param name string # フォント名
+---@param size integer # サイズ
+---@param type setfont_type # 書式
+function setfont(name,size,type)end
+
+---`obj.load("text")`で使うフォント(書式)を変更する
+---@param name string # フォント名
+---@param size integer # サイズ
+---@param type setfont_type # 書式
+---@param col1 integer # 文字色
+function setfont(name,size,type,col1)end
+
+---`obj.load("text")`で使うフォント(書式)を変更する
+---@param name string # フォント名
+---@param size integer # サイズ
+---@param type setfont_type # 書式
+---@param col1 integer # 文字色
+---@param col2 integer # 影/縁色
+function setfont(name,size,type,col1,col2)end
+
+---`obj.load("text")`で使うフォント(書式)を変更する
+---@param name string # フォント名
+---@param size integer # サイズ
+---@param type setfont_type # 書式
+---@param col1 integer # 文字色
+---@param col2 integer # 影/縁色
+---@param bold boolean # 太字か？ (`true` = 太字 / `false` <デフォルト> = 通常)
+function setfont(name,size,type,col1,col2,bold)end
+
+---`obj.load("text")`で使うフォント(書式)を変更する
+---@param name string # フォント名
+---@param size integer # サイズ
+---@param type setfont_type # 書式
+---@param col1 integer # 文字色
+---@param col2 integer # 影/縁色
+---@param bold boolean # 太字か？ (`true` = 太字 / `false` <デフォルト> = 通常)
+---@param italic boolean # 斜体か？ (`true` = 斜体 / `false` <デフォルト> = 通常)
+function setfont(name,size,type,col1,col2,bold,italic)end
+
+---`obj.load("text")`で使うフォント(書式)を変更する
+---@param name string # フォント名
+---@param size integer # サイズ
+---@param type setfont_type # 書式
+---@param col1 integer # 文字色
+---@param col2 integer # 影/縁色
+---@param bold boolean # 太字か？ (`true` = 太字 / `false` <デフォルト> = 通常)
+---@param italic boolean # 斜体か？ (`true` = 斜体 / `false` <デフォルト> = 通常)
+---@param charspacing number # 文字間隔
+function setfont(name,size,type,col1,col2,bold,italic,charspacing)end
+
+---`obj.load("text")`で使うフォント(書式)を変更する
+---@param name string # フォント名
+---@param size integer # サイズ
+---@param type setfont_type # 書式
+---@param col1 integer # 文字色
+---@param col2 integer # 影/縁色
+---@param bold boolean # 太字か？ (`true` = 太字 / `false` <デフォルト> = 通常)
+---@param italic boolean # 斜体か？ (`true` = 斜体 / `false` <デフォルト> = 通常)
+---@param charspacing number # 文字間隔
+---@param linespacing number # 行間隔
+function setfont(name,size,type,col1,col2,bold,italic,charspacing,linespacing)end
+
+
 ---同じパラメータを渡せば同じ結果が返る乱数関数
 ---seed = 0
 ---frame = obj.frame

@@ -955,6 +955,33 @@ function XOR(a,b)end
 function SHIFT(a,b)end
 
 
+---`obj.load("text")`で使うフォント(書式)を変更する
+---@param name string # フォント名
+---@param size integer # サイズ
+function setfont(name,size)end
+
+---`obj.load("text")`で使うフォント(書式)を変更する
+---@param name string # フォント名
+---@param size integer # サイズ
+---@param type setfont_type # 書式
+function setfont(name,size,type)end
+
+---`obj.load("text")`で使うフォント(書式)を変更する
+---@param name string # フォント名
+---@param size integer # サイズ
+---@param type setfont_type # 書式
+---@param col1 integer # 文字色
+function setfont(name,size,type,col1)end
+
+---`obj.load("text")`で使うフォント(書式)を変更する
+---@param name string # フォント名
+---@param size integer # サイズ
+---@param type setfont_type # 書式
+---@param col1 integer # 文字色
+---@param col2 integer # 影/縁色
+function setfont(name,size,type,col1,col2)end
+
+
 ---同じパラメータを渡せば同じ結果が返る乱数関数
 ---seed = 0
 ---frame = obj.frame

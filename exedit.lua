@@ -955,13 +955,6 @@ function XOR(a,b)end
 function SHIFT(a,b)end
 
 
----@alias setfont_type
----|0 # 標準
----|1 # 影付き
----|2 # 影付き(薄)
----|3 # 縁取り
----|4 # 縁取り(細)
-
 ---`obj.load("text")`で使うフォント(書式)を変更する
 ---@param name string # フォント名
 ---@param size integer # サイズ

@@ -86,6 +86,14 @@ global = {}
 local camera_param={}
 
 
+---@class camera_focus
+---@field x number # カメラの焦点座標X
+---@field y number # カメラの焦点座標Y
+---@field z number # カメラの焦点座標Z
+---@field bokeh number # カメラの深度ぼけの強さ
+local camera_focus={}
+
+
 ---@class obj
 ---@field x number  # 基準座標(X)
 ---@field y number  # 基準座標(Y)
@@ -718,6 +726,11 @@ function obj.setoption(name,value)end
 ---@param cam camera_param
 function obj.setoption(name,cam)end
 
+---カメラの焦点のパラメータを設定する
+---@param name "camera_focus"
+---@param focus camera_focus
+function obj.setoption(name,focus)end
+
 ---@alias setoption_sampler_value
 ---|'"clip"' # 領域外は透明色
 ---|'"clamp"' # 領域外は一番外側の色
@@ -745,6 +758,7 @@ function obj.setoption(name,value)end
 ---|'"gui"' #オブジェクト設定GUIが表示されているかをbooleanで返す
 ---|'"camera_mode"' #カメラ制御の対象か(カメラマークが付いているか)
 ---|'"camera_param"' #カメラの設定
+---|'"camera_focus"' #カメラの焦点
 ---|'"multi_object"' #個別オブジェクトが有効かどうかをbooleanで返す
 
 ---トラックバーの移動モード
@@ -789,6 +803,12 @@ function obj.getoption(name)end
 ---カメラの設定
 ---@param name "camera_param"
 ---@return camera_param
+---@nodiscard
+function obj.getoption(name)end
+
+---カメラの焦点
+---@param name "camera_focus"
+---@return camera_focus
 ---@nodiscard
 function obj.getoption(name)end
 

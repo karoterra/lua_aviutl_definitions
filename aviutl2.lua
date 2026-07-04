@@ -94,6 +94,13 @@ local camera_param={}
 local camera_focus={}
 
 
+---@class bpm
+---@field tempo number # テンポ
+---@field beat integer # 拍子
+---@field offset number # 基準時間
+local bpm={}
+
+
 ---@class obj
 ---@field x number  # 基準座標(X)
 ---@field y number  # 基準座標(Y)
@@ -617,6 +624,22 @@ function obj.setfont(name,size,type,col1,col2,bold,italic,charspacing)end
 function obj.setfont(name,size,type,col1,col2,bold,italic,charspacing,linespacing)end
 
 
+---`obj.load()`のテキストで使うフォント設定を取得します。
+---
+---フォント名の初期値は空(デフォルト指定)になります。
+---@return string # フォント名
+---@return integer # サイズ
+---@return setfont_type # 書式
+---@return integer # 文字色
+---@return integer # 影/縁色
+---@return boolean # 太字か？
+---@return boolean # 斜体か？
+---@return number # 文字間隔
+---@return number # 行間隔
+---@nodiscard
+function obj.getfont()end
+
+
 ---同じパラメータを渡せば同じ結果が返る乱数関数
 ---seed = 0
 ---frame = obj.frame
@@ -760,6 +783,9 @@ function obj.setoption(name,value)end
 ---|'"camera_param"' #カメラの設定
 ---|'"camera_focus"' #カメラの焦点
 ---|'"multi_object"' #個別オブジェクトが有効かどうかをbooleanで返す
+---|'"blend"' #合成モード
+---|'"culling"' #裏面を表示しないか
+---|'"billboard"' #カメラの方向を向くか
 
 ---トラックバーの移動モード
 ---@param name "track_mode"
@@ -815,6 +841,26 @@ function obj.getoption(name)end
 ---個別オブジェクトが有効かどうか
 ---@param name "multi_object"
 ---@return boolean
+---@nodiscard
+function obj.getoption(name)end
+
+---合成モードを取得する
+---
+---出力項目(標準描画等)の合成モードは最後に反映されます。
+---@param name "blend"
+---@return blend_mode
+---@nodiscard
+function obj.getoption(name)end
+
+---裏面を表示しないかを取得する
+---@param name "culling"
+---@return bool_int # 0: 表示, 1: 非表示
+---@nodiscard
+function obj.getoption(name)end
+
+---カメラの方向を向くかを取得する
+---@param name "billboard"
+---@return `0`|`1`|`2`|`3` # 0: 向かない, 1: 横方向のみ 2: 縦方向のみ 3: 向く
 ---@nodiscard
 function obj.getoption(name)end
 
@@ -927,53 +973,53 @@ function obj.getvalue(target,time)end
 function obj.getvalue(target,time,section)end
 
 ---現在のオブジェクトの設定値を取得します。
----@param effect string # 対象のエフェクト名 (エイリアスファイルのeffect.nameの値)。同じエフェクトが複数ある場合は":n"のサフィックスでインデックス指定出来ます (nは0からの番号)
+---@param effect string # 対象のエフェクト名 (エイリアスファイルのeffect.nameの値)。同じエフェクトが複数ある場合は":n"のサフィックスでインデックス指定出来ます (nは0からの番号)。エフェクトが無効状態の場合は対象から除外されます。
 ---@param item string # 対象の設定項目の名称 (エイリアスファイルのキーの名称) ※名称が数値の場合は利用出来ません
----@return number|string|boolean|nil # トラックバーの場合は指定時間の設定値、セクション毎チェックボックスの場合は指定時間のセクションの設定値、それ以外の場合はエイリアスファイルの設定値と同じフォーマットの値。
+---@return number|string|boolean|nil # トラックバーの場合は指定時間の設定値、セクション毎チェックボックスの場合は指定時間のセクションの設定値、それ以外の場合はエイリアスファイルの設定値と同じフォーマットの値。取得対象が存在しない場合は返却無し ※nilで判定出来ます
 ---@nodiscard
 function obj.getvalue(effect,item)end
 
 ---現在のオブジェクトの設定値を取得します。
----@param effect string # 対象のエフェクト名 (エイリアスファイルのeffect.nameの値)。同じエフェクトが複数ある場合は":n"のサフィックスでインデックス指定出来ます (nは0からの番号)
+---@param effect string # 対象のエフェクト名 (エイリアスファイルのeffect.nameの値)。同じエフェクトが複数ある場合は":n"のサフィックスでインデックス指定出来ます (nは0からの番号)。エフェクトが無効状態の場合は対象から除外されます。
 ---@param item string # 対象の設定項目の名称 (エイリアスファイルのキーの名称) ※名称が数値の場合は利用出来ません
 ---@param time number # どの時点の値を取得するかの時間(秒)(省略時は現時間)
----@return number|string|boolean|nil # トラックバーの場合は指定時間の設定値、セクション毎チェックボックスの場合は指定時間のセクションの設定値、それ以外の場合はエイリアスファイルの設定値と同じフォーマットの値。
+---@return number|string|boolean|nil # トラックバーの場合は指定時間の設定値、セクション毎チェックボックスの場合は指定時間のセクションの設定値、それ以外の場合はエイリアスファイルの設定値と同じフォーマットの値。取得対象が存在しない場合は返却無し ※nilで判定出来ます
 ---@nodiscard
 function obj.getvalue(effect,item,time)end
 
 ---現在のオブジェクトの設定値を取得します。
----@param effect string # 対象のエフェクト名 (エイリアスファイルのeffect.nameの値)。同じエフェクトが複数ある場合は":n"のサフィックスでインデックス指定出来ます (nは0からの番号)
+---@param effect string # 対象のエフェクト名 (エイリアスファイルのeffect.nameの値)。同じエフェクトが複数ある場合は":n"のサフィックスでインデックス指定出来ます (nは0からの番号)。エフェクトが無効状態の場合は対象から除外されます。
 ---@param item string # 対象の設定項目の名称 (エイリアスファイルのキーの名称) ※名称が数値の場合は利用出来ません
 ---@param time number # どの時点の値を取得するかの時間(秒)(省略時は現時間)
 ---@param section integer # 時間の基準となる区間の番号(省略時は開始点) (0=開始点 / 1=最初の中間点 / 2=2個目の中間点 / -1=終了点)
----@return number|string|boolean|nil # トラックバーの場合は指定時間の設定値、セクション毎チェックボックスの場合は指定時間のセクションの設定値、それ以外の場合はエイリアスファイルの設定値と同じフォーマットの値。
+---@return number|string|boolean|nil # トラックバーの場合は指定時間の設定値、セクション毎チェックボックスの場合は指定時間のセクションの設定値、それ以外の場合はエイリアスファイルの設定値と同じフォーマットの値。取得対象が存在しない場合は返却無し ※nilで判定出来ます
 ---@nodiscard
 function obj.getvalue(effect,item,time,section)end
 
 ---指定レイヤーのオブジェクトの設定値を取得します。※現時間のオブジェクトが対象になります
 ---@param layer integer # 対象レイヤー番号(1～)
----@param effect string # 対象のエフェクト名 (エイリアスファイルのeffect.nameの値)。同じエフェクトが複数ある場合は":n"のサフィックスでインデックス指定出来ます (nは0からの番号)
+---@param effect string # 対象のエフェクト名 (エイリアスファイルのeffect.nameの値)。同じエフェクトが複数ある場合は":n"のサフィックスでインデックス指定出来ます (nは0からの番号)。エフェクトが無効状態の場合は対象から除外されます。
 ---@param item string # 対象の設定項目の名称 (エイリアスファイルのキーの名称) ※名称が数値の場合は利用出来ません
----@return number|string|boolean|nil # トラックバーの場合は指定時間の設定値、セクション毎チェックボックスの場合は指定時間のセクションの設定値、それ以外の場合はエイリアスファイルの設定値と同じフォーマットの値。
+---@return number|string|boolean|nil # トラックバーの場合は指定時間の設定値、セクション毎チェックボックスの場合は指定時間のセクションの設定値、それ以外の場合はエイリアスファイルの設定値と同じフォーマットの値。取得対象が存在しない場合は返却無し ※nilで判定出来ます
 ---@nodiscard
 function obj.getvalue(layer,effect,item)end
 
 ---指定レイヤーのオブジェクトの設定値を取得します。※現時間のオブジェクトが対象になります
 ---@param layer integer # 対象レイヤー番号(1～)
----@param effect string # 対象のエフェクト名 (エイリアスファイルのeffect.nameの値)。同じエフェクトが複数ある場合は":n"のサフィックスでインデックス指定出来ます (nは0からの番号)
+---@param effect string # 対象のエフェクト名 (エイリアスファイルのeffect.nameの値)。同じエフェクトが複数ある場合は":n"のサフィックスでインデックス指定出来ます (nは0からの番号)。エフェクトが無効状態の場合は対象から除外されます。
 ---@param item string # 対象の設定項目の名称 (エイリアスファイルのキーの名称) ※名称が数値の場合は利用出来ません
 ---@param time number # どの時点の値を取得するかの時間(秒)(省略時は現時間)
----@return number|string|boolean|nil # トラックバーの場合は指定時間の設定値、セクション毎チェックボックスの場合は指定時間のセクションの設定値、それ以外の場合はエイリアスファイルの設定値と同じフォーマットの値。
+---@return number|string|boolean|nil # トラックバーの場合は指定時間の設定値、セクション毎チェックボックスの場合は指定時間のセクションの設定値、それ以外の場合はエイリアスファイルの設定値と同じフォーマットの値。取得対象が存在しない場合は返却無し ※nilで判定出来ます
 ---@nodiscard
 function obj.getvalue(layer,effect,item,time)end
 
 ---指定レイヤーのオブジェクトの設定値を取得します。※現時間のオブジェクトが対象になります
 ---@param layer integer # 対象レイヤー番号(1～)
----@param effect string # 対象のエフェクト名 (エイリアスファイルのeffect.nameの値)。同じエフェクトが複数ある場合は":n"のサフィックスでインデックス指定出来ます (nは0からの番号)
+---@param effect string # 対象のエフェクト名 (エイリアスファイルのeffect.nameの値)。同じエフェクトが複数ある場合は":n"のサフィックスでインデックス指定出来ます (nは0からの番号)。エフェクトが無効状態の場合は対象から除外されます。
 ---@param item string # 対象の設定項目の名称 (エイリアスファイルのキーの名称) ※名称が数値の場合は利用出来ません
 ---@param time number # どの時点の値を取得するかの時間(秒)(省略時は現時間)
 ---@param section integer # 時間の基準となる区間の番号(省略時は開始点) (0=開始点 / 1=最初の中間点 / 2=2個目の中間点 / -1=終了点)
----@return number|string|boolean|nil # トラックバーの場合は指定時間の設定値、セクション毎チェックボックスの場合は指定時間のセクションの設定値、それ以外の場合はエイリアスファイルの設定値と同じフォーマットの値。
+---@return number|string|boolean|nil # トラックバーの場合は指定時間の設定値、セクション毎チェックボックスの場合は指定時間のセクションの設定値、それ以外の場合はエイリアスファイルの設定値と同じフォーマットの値。取得対象が存在しない場合は返却無し ※nilで判定出来ます
 ---@nodiscard
 function obj.getvalue(layer,effect,item,time,section)end
 
@@ -1463,11 +1509,17 @@ function obj.getinfo(name)end
 ---@nodiscard
 function obj.getinfo(name)end
 
----グリッド(BPM)の情報を取得する
+---グリッド(BPM)の情報を取得する ※先頭のBPM情報を取得します
 ---@param name "bpm"
 ---@return number tempo
 ---@return integer beat
 ---@return number offset
+---@nodiscard
+function obj.getinfo(name)end
+
+---グリッド(BPM)の一覧情報を取得する
+---@param name "bpm_list"
+---@return bpm[] # BPM情報のテーブルの配列
 ---@nodiscard
 function obj.getinfo(name)end
 

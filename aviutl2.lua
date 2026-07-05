@@ -97,7 +97,8 @@ local camera_focus={}
 ---@class bpm
 ---@field tempo number # テンポ
 ---@field beat integer # 拍子
----@field offset number # 基準時間
+---@field start number # 開始位置(秒)
+---@field offset number # 拍子オフセット(秒)
 local bpm={}
 
 
@@ -786,6 +787,8 @@ function obj.setoption(name,value)end
 ---|'"blend"' #合成モード
 ---|'"culling"' #裏面を表示しないか
 ---|'"billboard"' #カメラの方向を向くか
+---|'"drawtarget"' #描画先の情報
+---|'"draw_state"' #スクリプト内でフレームバッファに描画されたかのステータス
 
 ---トラックバーの移動モード
 ---@param name "track_mode"
@@ -864,6 +867,17 @@ function obj.getoption(name)end
 ---@nodiscard
 function obj.getoption(name)end
 
+---描画先の情報を取得する
+---@param name "drawtarget"
+---@return "tempbuffer"|"framebuffer" # "tempbuffer": 仮想バッファ, "framebuffer": フレームバッファ
+---@nodiscard
+function obj.getoption(name)end
+
+---スクリプト内でフレームバッファに描画されたかのステータスを取得する
+---@param name "draw_state"
+---@return boolean # true: 描画済み, false: 未描画
+---@nodiscard
+function obj.getoption(name)end
 
 ---@alias getvalue_target
 ---|integer # 自身のスクリプトファイルのトラックバー
@@ -1464,6 +1478,18 @@ function obj.getpoint(target,option)end
 ---@nodiscard
 function obj.getpoint(target,option,option2)end
 
+---全体(シーン)基準の現在のオブジェクトの開始フレームを取得する (0からの整数)
+---@param target "frame_s"
+---@return integer
+---@nodiscard
+function obj.getpoint(target)end
+
+---全体(シーン)基準の現在のオブジェクトの終了フレームを取得する (0からの整数)
+---@param target "frame_e"
+---@return integer
+---@nodiscard
+function obj.getpoint(target)end
+
 ---トラックバー変化方法スクリプトでのみ有効<br>フレームレートを取得する
 ---@param target "framerate"
 ---@return number
@@ -1509,17 +1535,29 @@ function obj.getinfo(name)end
 ---@nodiscard
 function obj.getinfo(name)end
 
+---オブジェクトが存在する最大のフレーム番号を取得する
+---@param name "frame_max"
+---@return integer # 最大のフレーム番号(0からの整数)
+---@nodiscard
+function obj.getinfo(name)end
+
+---オブジェクトが存在する最大のレイヤー番号を取得する
+---@param name "layer_max"
+---@return integer # 最大のレイヤー番号(1からの整数)
+---@nodiscard
+function obj.getinfo(name)end
+
 ---グリッド(BPM)の情報を取得する ※先頭のBPM情報を取得します
 ---@param name "bpm"
----@return number tempo
----@return integer beat
----@return number offset
+---@return number tempo # テンポ
+---@return integer beat # 拍子
+---@return number offset # 拍子オフセット(秒)
 ---@nodiscard
 function obj.getinfo(name)end
 
 ---グリッド(BPM)の一覧情報を取得する
 ---@param name "bpm_list"
----@return bpm[] # BPM情報のテーブルの配列
+---@return bpm[] # BPM情報テーブルの配列
 ---@nodiscard
 function obj.getinfo(name)end
 

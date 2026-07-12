@@ -82,7 +82,7 @@ global = {}
 ---@field ux number # 上方向単位ベクトル(X)
 ---@field uy number # 上方向単位ベクトル(Y)
 ---@field uz number # 上方向単位ベクトル(Z)
----@field d number  # カメラからスクリーンまでの距離(焦点距離)
+---@field d number  # カメラからスクリーンまでの距離
 local camera_param={}
 
 
@@ -825,17 +825,21 @@ function obj.getoption(name)end
 
 ---カメラ制御の対象か
 ---@param name "camera_mode"
----@return boolean
+---@return bool_int # 0: 対象外, 1: 対象
 ---@nodiscard
 function obj.getoption(name)end
 
 ---カメラの設定
+---
+---カメラ制御対象外の場合は既定値が返ります。
 ---@param name "camera_param"
 ---@return camera_param
 ---@nodiscard
 function obj.getoption(name)end
 
 ---カメラの焦点
+---
+---カメラ制御対象外の場合は既定値が返ります。
 ---@param name "camera_focus"
 ---@return camera_focus
 ---@nodiscard

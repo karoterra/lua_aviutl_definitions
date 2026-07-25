@@ -497,12 +497,48 @@ function obj.load(type,text,speed,time,align)end
 
 ---@param type "figure"
 ---@param name figure_name
+---@return boolean # 読み込みに成功したか
+function obj.load(type,name)end
+
+---@param type "figure"
+---@param name figure_name
+---@param color integer # 図形の色
+---@return boolean # 読み込みに成功したか
+function obj.load(type,name,color)end
+
+---@param type "figure"
+---@param name figure_name
+---@param color integer # 図形の色
+---@param size integer # サイズ
+---@return boolean # 読み込みに成功したか
+function obj.load(type,name,color,size)end
+
+---@param type "figure"
+---@param name figure_name
+---@param color integer # 図形の色
+---@param size integer # サイズ
+---@param line integer # ライン幅
+---@return boolean # 読み込みに成功したか
+function obj.load(type,name,color,size,line)end
+
+---@param type "figure"
+---@param name figure_name
 ---@param color integer # 図形の色
 ---@param size integer # サイズ
 ---@param line integer # ライン幅
 ---@param round boolean # 角を丸くする
 ---@return boolean # 読み込みに成功したか
 function obj.load(type,name,color,size,line,round)end
+
+---@param type "figure"
+---@param name figure_name
+---@param color integer # 図形の色
+---@param size integer # サイズ
+---@param line integer # ライン幅
+---@param round boolean # 角を丸くする
+---@param aspect number # アスペクト比(-1.0～1.0/プラス=横縮小/マイナス=縦縮小)
+---@return boolean # 読み込みに成功したか
+function obj.load(type,name,color,size,line,round,aspect)end
 
 ---フレームバッファを読み込む
 ---@param type "framebuffer"

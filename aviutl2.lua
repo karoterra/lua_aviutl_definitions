@@ -135,6 +135,9 @@ local bpm={}
 ---@field num integer   # 個別オブジェクトの個数
 ---@field id integer    # オブジェクトのID
 ---@field effect_id integer # オブジェクトの内の対象エフェクトのID
+---@field frame_s integer # 全体(シーン)基準のオブジェクトの開始フレーム
+---@field frame_e integer # 全体(シーン)基準のオブジェクトの終了フレーム
+---@field effect_layer integer # 対象エフェクトが配置されているレイヤー
 ---@field track0 number # 1番目のトラックバーの値
 ---@field track1 number # 2番目のトラックバーの値
 ---@field track2 number # 3番目のトラックバーの値
@@ -1093,6 +1096,8 @@ function obj.getvalue(layer,effect,item,time,section)end
 ---|'"rgba"' # 線の色(RGBA)を変更する ※後続引数：色(0x00000000～0xffffffff)
 ---|'"inout"' # 上記オプションの線の表示をIN,OUT側の2個として表示する(アンカー数は半々)
 ---|'"xyz"' # アンカーポイントを3D座標で制御する ※デフォルトは2D座標
+---|'"offset"' # アンカーポイントの表示オフセットを設定する ※後続引数：X, Y
+---|'"offset.xyz"' # アンカーポイントの表示オフセットを3D座標で設定する ※後続引数：X, Y, Z
 ---|'"screen"' # スクリーン座標で制御する ※デフォルトはオブジェクト座標
 ---|'"small"' # 小さいアンカーポイントで表示する
 ---|integer
@@ -1624,6 +1629,7 @@ function obj.getinfo(name)end
 ---汎用データ領域を取得します。
 ---@param name string # 汎用データ領域の登録名
 ---@return lightuserdata # 汎用データ領域のポインタ
+---@return integer # 汎用データ領域のサイズ
 ---@nodiscard
 function obj.data(name)end
 

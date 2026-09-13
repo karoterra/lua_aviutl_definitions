@@ -863,9 +863,16 @@ function obj.getoption(name,value,skip)end
 ---@nodiscard
 function obj.getoption(name)end
 
+---グループ制御情報
+---
+---現在のオブジェクトの直前のグループ制御のみ取得出来ます。
+---@param name "group_info"
+---@return integer # 0: グループ制御対象外, 1以上: グループ制御のレイヤー番号
+function obj.getoption(name)end
+
 ---カメラ制御の対象か
 ---@param name "camera_mode"
----@return bool_int # 0: 対象外, 1: 対象
+---@return `0`|`1`|`2` # 0: カメラ制御対象外, 1: カメラ制御対象, 2: カメラ制御対象(編集用視点)
 ---@nodiscard
 function obj.getoption(name)end
 

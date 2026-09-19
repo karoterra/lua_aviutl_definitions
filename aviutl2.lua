@@ -864,11 +864,17 @@ function obj.getoption(name,value,skip)end
 function obj.getoption(name)end
 
 ---グループ制御情報
----
----現在のオブジェクトの直前のグループ制御のみ取得出来ます。
 ---@param name "group_info"
 ---@return integer # 0: グループ制御対象外, 1以上: グループ制御のレイヤー番号
+---@nodiscard
 function obj.getoption(name)end
+
+---グループ制御情報
+---@param name "group_info"
+---@param index integer # 上位の影響しているグループ制御のインデックス(0は直前のグループ制御)
+---@return integer # 0: グループ制御対象外, 1以上: グループ制御のレイヤー番号
+---@nodiscard
+function obj.getoption(name,index)end
 
 ---カメラ制御の対象か
 ---@param name "camera_mode"
@@ -927,6 +933,30 @@ function obj.getoption(name)end
 ---スクリプト内でフレームバッファに描画されたかのステータスを取得する
 ---@param name "draw_state"
 ---@return boolean # true: 描画済み, false: 未描画
+---@nodiscard
+function obj.getoption(name)end
+
+---グループ制御対象を有効にしているかを取得する
+---@param name "enable_group"
+---@return boolean # true: 有効, false: 無効
+---@nodiscard
+function obj.getoption(name)end
+
+---カメラ制御対象を有効にしているかを取得する
+---@param name "enable_camera"
+---@return boolean # true: 有効, false: 無効
+---@nodiscard
+function obj.getoption(name)end
+
+---クリッピングオブジェクトを有効にしているかを取得する
+---@param name "clipping_object"
+---@return boolean # true: 有効, false: 無効
+---@nodiscard
+function obj.getoption(name)end
+
+---上のオブジェクトでクリッピングを有効にしているかを取得する
+---@param name "clipping_upper_object"
+---@return boolean # true: 有効, false: 無効
 ---@nodiscard
 function obj.getoption(name)end
 

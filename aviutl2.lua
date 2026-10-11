@@ -1617,6 +1617,12 @@ function obj.getinfo(name)end
 ---@nodiscard
 function obj.getinfo(name)end
 
+---描画処理の起点のシーン番号を取得する
+---@param name "origin_scene_id"
+---@return integer
+---@nodiscard
+function obj.getinfo(name)end
+
 ---動画の出力中かを取得する
 ---@param name "saving"
 ---@return boolean

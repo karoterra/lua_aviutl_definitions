@@ -1622,6 +1622,20 @@ function obj.getinfo(name)end
 ---@nodiscard
 function obj.getinfo(name)end
 
+---シーンチェンジ、モーションブラーの参照フレーム処理かを調べる
+---@param name "reference_frame"
+---@return boolean
+---@nodiscard
+function obj.getinfo(name)end
+
+---シーンの描画処理毎のIDを取得する
+---
+---※別のシーン等を参照する処理は個々のIDとなります
+---@param name "rendering_id"
+---@return integer
+---@nodiscard
+function obj.getinfo(name)end
+
 ---動画の出力中かを取得する
 ---@param name "saving"
 ---@return boolean
